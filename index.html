@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beyond Why</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      background: radial-gradient(circle at bottom, #0a0a1a, #000);
+      overflow-x: hidden;
+    }
+
+    /* Starfield background */
+    canvas#stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    header {
+      text-align: center;
+      padding: 100px 20px 60px;
+      animation: fadeIn 2s ease-in;
+    }
+
+    header h1 {
+      font-size: 3.5em;
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 2px;
+      color: #d0c4ff;
+      text-shadow: 0 0 20px #7b5cf0;
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+
+    header p {
+      font-size: 1.2em;
+      margin-top: 20px;
+      color: #bdbde7;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    nav {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #c9c9ff;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ffffff;
+      text-shadow: 0 0 10px #8e7cff;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2em;
+      color: #cbbcff;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    section p {
+      color: #d7d7f7;
+      line-height: 1.7;
+      text-align: justify;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #5c47e0; }
+      to { text-shadow: 0 0 25px #a591ff; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+  <header>
+    <h1>Beyond Why</h1>
+    <p>Exploring the universe's deep secrets and curious questions through physics and thoughts.</p>
+  </header>
+
+  <nav>
+    <a href="#physics">Physics & Research</a>
+    <a href="#thoughts">Thoughts & Reflections</a>
+    <a href="#projects">Academic Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="physics">
+    <h2>Physics & Research</h2>
+    <p>Here you’ll find my explorations into the fundamental laws of the universe — from quantum mysteries to cosmic phenomena. Articles coming soon.</p>
+<a href="planck-constant.html">What is Planck's Constant?</a><br>
+
+  </section>
+
+  <section id="thoughts">
+    <h2>Thoughts & Reflections</h2>
+    <p>Where equations meet emotions — reflections on life, meaning, and the wonder that connects physics to philosophy. Blogs coming soon.</p>
+  </section>
+
+  <section id="projects">
+    <h2>Academic Projects</h2>
+    <p>A collection of my academic and creative projects — research, presentations, and personal works that express my passion for science and design.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Feel free to reach out via email at <strong>wajeeha.sardar.231@gmail.com</strong> .</p>
+  </section>
+
+  <script>
+    // Animated starfield background
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      stars = Array.from({length: 200}, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.5,
+        dx: (Math.random() - 0.5) * 0.3,
+        dy: (Math.random() - 0.5) * 0.3
+      }));
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#ffffff';
+      stars.forEach(s => {
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+        s.x += s.dx;
+        s.y += s.dy;
+        if (s.x < 0 || s.x > canvas.width) s.dx *= -1;
+        if (s.y < 0 || s.y > canvas.height) s.dy *= -1;
+      });
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    animate();
+  </script>
+</body>
+</html>
